@@ -1,25 +1,12 @@
-const xyz = '24234.454dasd'
-console.log(parseInt(xyz)) //24234
-console.log(parseFloat(xyz)) //24234.454
+// The new at method in ES6
+const arr = [23,11,64];
+console.log(arr[0]); //23
+console.log(arr.at(0)); //23 
+// why useful? to get last element traditionally- 
+console.log(arr[arr.length - 1]); //64
+console.log(arr.slice(-1)[0]); //64
+console.log(arr.at(-1)); //64  also can use method chaining
 
-function stringToNum(str){
-  if(Number.isNaN('dsfdsfd')){
-  throw 'String that cannot be converted'
-	}
-  if (Number.isInteger(str)) return Number.parseInt(str)
-}
-
-console.log(stringToNum('5.65asdsad'))
-
-console.log(`Number.isNaN()`, Number.isNaN('salesforce')) // false
-console.log(`Global isNan()`, isNaN('salesforce')); // true 
-
-const now = new Date()
-console.log(now);
+console.log('Ash'.at(-1)); //h
 
 
-const start = new Date()
-function dateFormat(date){
-    return `${date.getDate()} - ${date.getMonth() + 1} -${date.getFullYear()}`
-}
-console.log(dateFormat(start));
