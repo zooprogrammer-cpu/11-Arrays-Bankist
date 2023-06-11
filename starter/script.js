@@ -1,12 +1,19 @@
-// The new at method in ES6
-const arr = [23,11,64];
-console.log(arr[0]); //23
-console.log(arr.at(0)); //23 
-// why useful? to get last element traditionally- 
-console.log(arr[arr.length - 1]); //64
-console.log(arr.slice(-1)[0]); //64
-console.log(arr.at(-1)); //64  also can use method chaining
+// 'use strict';
 
-console.log('Ash'.at(-1)); //h
+// /////////////////////////////////////////////////
+
+// For Each loop and Index of For Each loop
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+movements.forEach((mov, i, arr)=>{
+  if (mov > 0){
+    console.log(`Movement ${i-1}:You deposited ${mov}`);
+  } else {
+    console.log(`Movement ${i-1}:You withdrew ${Math.abs(mov)}`);
+  }
+})
+
+
+
+
 
 
