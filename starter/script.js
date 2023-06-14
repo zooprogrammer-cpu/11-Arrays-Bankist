@@ -1,10 +1,7 @@
 // 'use strict';
-
 // /////////////////////////////////////////////////
-
 //
 // BANKIST APP
-
 /////////////////////////////////////////////////
 // Data
 const account1 = {
@@ -34,6 +31,8 @@ const account4 = {
   interestRate: 1,
   pin: 4444,
 };
+
+const accounts = [account1, account2, account3, account4];
 
 /////////////////////////////////////////////////
 // Elements
@@ -69,9 +68,8 @@ const displayMovements = function (movements) {
 
     const html = `
       <div class="movements__row">
-        <div class="movements__type movements__type--${type}">${
-      i + 1
-    } ${type}</div>
+        <div class="movements__type movements__type--${type}">${i + 1
+      } ${type}</div>
         <div class="movements__value">${mov}€</div>
       </div>
     `;
@@ -79,32 +77,41 @@ const displayMovements = function (movements) {
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
-displayMovements(account1.movements); 
-console.log(containerMovements.innerHTML);
-/////////////////////////////////////////////////
+displayMovements(account1.movements);
 
-// Maps
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// Adds a username property to each account without using push or add
+// used forEach to have "side-effects" without returning anything, just did some work
+const createUsernames = function (accs) {
+  accs.forEach((acc)=>{
+    acc.username = acc.owner
+    .toLowerCase()
+    .split(' ')
+    .map(name => name[0])
+    .join('');
+  });
+};
 
-const eurTousd = 1.1;
-const movementsUSD = movements.map((mov)=>{
-  return mov * eurTousd; 
-})
+createUsernames(accounts);
+console.log(accounts);
+// interestRate
+// : 
+// 1.2
+// movements
+// : 
+// (8) [200, 450, -400, 3000, -650, -130, 70, 1300]
+// owner
+// : 
+// "Jonas Schmedtmann"
+// pin
+// : 
+// 1111
+// username
+// : 
+// "js"
 
-console.log(movements);
-console.log(movementsUSD);
 
-const movementsDescriptions = movements.map((mov, i)=>{
-  return  `Movement ${i + 1} You ${mov > 0 ? 'deposited' :
-   'withdrew'} ${Math.abs(mov)}`
-  // if (mov > 0) {
-  //   return (`Movement ${i + 1}: You deposited ${mov}`);
-  // } else {
-  //   return (`Movement ${i + 1}: You withdrew ${Math.abs(mov)}`);
-  // }
-})
 
-console.log(movementsDescriptions);
+
 
 
 
