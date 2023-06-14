@@ -92,25 +92,19 @@ const createUsernames = function (accs) {
 };
 
 createUsernames(accounts);
-console.log(accounts);
-// interestRate
-// : 
-// 1.2
-// movements
-// : 
-// (8) [200, 450, -400, 3000, -650, -130, 70, 1300]
-// owner
-// : 
-// "Jonas Schmedtmann"
-// pin
-// : 
-// 1111
-// username
-// : 
-// "js"
 
 
+// Filter
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const deposits = movements.filter((mov)=>{
+  return mov > 0; 
+})
+console.log(`deposits`, deposits);
 
+const withdrawals = movements.filter((mov)=>{
+  return mov < 0; 
+})
+console.log('withdrwals:', withdrawals);
 
 
 
