@@ -96,7 +96,7 @@ createUsernames(accounts);
 
 // Filter
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-const deposits = movements.filter((mov)=>{
+const deposits = movements.filter((mov)=>{ 
   return mov > 0; 
 })
 console.log(`deposits`, deposits);
@@ -105,6 +105,15 @@ const withdrawals = movements.filter((mov)=>{
   return mov < 0; 
 })
 console.log('withdrwals:', withdrawals);
+
+// Reduce
+// accumulator is like a snowball 
+const balance = movements.reduce((acc, cur, i, arr )=>{
+  console.log(`Iteration ${i} :${acc}`);
+  return acc + cur; 
+}, 0)
+console.log('balance:', balance);
+
 
 
 
