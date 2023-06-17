@@ -79,11 +79,11 @@ const displayMovements = function (movements) {
 };
 displayMovements(account1.movements);
 
-const calcDisplayBalance = (movements)=>{
-  const balance = movements.reduce((acc, mov) =>{
+const calcDisplayBalance = (movements) => {
+  const balance = movements.reduce((acc, mov) => {
     return acc + mov
   }, 0);
-  labelBalance.textContent = `${balance} EUR`; 
+  labelBalance.textContent = `${balance} EUR`;
 
 };
 calcDisplayBalance(account1.movements);
@@ -91,18 +91,51 @@ calcDisplayBalance(account1.movements);
 // Adds a username property to each account without using push or add
 // used forEach to have "side-effects" without returning anything, just did some work
 const createUsernames = function (accs) {
-  accs.forEach((acc)=>{
+  accs.forEach((acc) => {
     acc.username = acc.owner
-    .toLowerCase()
-    .split(' ')
-    .map(name => name[0])
-    .join('');
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('');
   });
 };
 
 createUsernames(accounts);
 
+//////////////////////////////////////
+// Coding Challenge #2
 
+
+// Let's go back to Julia and Kate's study about dogs. This time, they want to convert dog ages to human ages and calculate the average age of the dogs in their study.
+
+// Create a function 'calcAverageHumanAge', which accepts an arrays of dog's ages ('ages'), and does the following things in order:
+
+// 1. Calculate the dog age in human years using the following formula: if the dog is <= 2 years old, humanAge = 2 * dogAge. If the dog is > 2 years old, humanAge = 16 + dogAge * 4.
+// 2. Exclude all dogs that are less than 18 human years old (which is the same as keeping dogs that are at least 18 years old)
+// 3. Calculate the average human age of all adult dogs (you should already know from other challenges how we calculate averages 😉)
+// 4. Run the function for both test datasets
+
+// TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]
+// TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
+const dogAges1 = [5, 2, 4, 1, 15, 8, 3];
+const dogAges2 = [16, 6, 10, 5, 6, 1, 4];
+const calcAverageHumanAge = function (ages) {
+  const humanAges = ages.map(age => {
+    return age <= 2 ? age * 2 : (16 + age * 4);
+  })
+  const adults = humanAges.filter((age)=>{
+    return age > 18
+  })
+  console.log(humanAges);
+  console.log(adults);
+  const average = adults.reduce((acc, age)=>{
+    return (acc + age);
+  },0) / adults.length
+  return average; 
+}
+
+console.log(calcAverageHumanAge(dogAges1));
+console.log(calcAverageHumanAge(dogAges2));
 
 
 
