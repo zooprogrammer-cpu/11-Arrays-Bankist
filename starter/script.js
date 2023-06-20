@@ -79,14 +79,38 @@ const displayMovements = function (movements) {
 };
 displayMovements(account1.movements);
 
+// Sum all balance using reduce 
 const calcDisplayBalance = (movements) => {
   const balance = movements.reduce((acc, mov) => {
     return acc + mov
   }, 0);
-  labelBalance.textContent = `${balance} EUR`;
+  labelBalance.textContent = `${balance} €`;
 
 };
 calcDisplayBalance(account1.movements);
+
+// Sum only the income and out using filter and reduce
+const calcDisplaySummary = (movements) => {
+  const incomes = movements.filter(mov=> mov > 0)    
+  .reduce((acc, mov) => acc + mov, 0);
+  labelSumIn.textContent =`${incomes}€`;
+
+  const out = movements.filter(mov=> mov < 0)
+  .reduce((acc,mov) =>acc +mov, 0);
+  labelSumOut.textContent =`${Math.abs(out)}€`;
+
+  const interest = movements.filter(mov=> mov >0)
+  .map(deposit => deposit * 1.2/100)
+  .filter((int, i, arr)=> {
+    console.log(arr);
+    return int >= 1; // give interest on only 1
+  })
+  .reduce((acc,int) =>acc + int, 0);
+  labelSumInterest.textContent =`${interest}€`;
+
+};
+
+calcDisplaySummary(account1.movements);
 
 // Adds a username property to each account without using push or add
 // used forEach to have "side-effects" without returning anything, just did some work
@@ -137,6 +161,18 @@ const calcAverageHumanAge = function (ages) {
 console.log(calcAverageHumanAge(dogAges1));
 console.log(calcAverageHumanAge(dogAges2));
 
+// Chaining Methods
+const movements =  [200, 450, -400, 3000, -650, -130, 70, 1300];
+const eurToUsd = 1.1;
+const totalDeposits = movements
+  .filter(mov=> mov > 0)
+  // .map(mov=> mov * eurToUsd)
+  .map((mov, i, arr)=>{
+    console.log('array where map method is called on: ',arr);
+    return mov * eurToUsd;
+  })
+  .reduce((acc, mov)=> acc + mov, 0)
+console.log('totalDeposits', totalDeposits);
 
 
 
