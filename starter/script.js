@@ -215,6 +215,11 @@ console.log(calcAverageHumanAge(dogAges2)); //47.33
 
 
 
+// find method - returns the first elelemt in the array that satisfies the condition
+const firstWithdrawl = movements.find(mov => mov < 0);
+console.log('firstWithdrawl: ',firstWithdrawl);
 
-
+console.log(accounts);
+const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+console.log(account);
 
