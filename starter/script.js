@@ -191,7 +191,25 @@ btnTransfer.addEventListener('click', function(e){
 
 });
 
+///////
+// Closing an account means deleting the account object
+// Use splice to delete the account
+btnClose.addEventListener('click', function(e){
+  e.preventDefault();
+  // delete account if the currentuser is the same as the account to delete
+  if (currentAccount.username === inputCloseUsername.value && currentAccount.pin === Number(inputClosePin.value)){
+    console.log(`Delete account`);
+    const index = accounts.findIndex(acc => acc.username === currentAccount.username)
+    console.log(`index: ${index}`);
+    accounts.splice(index, 1);
+    console.log(`accounts after deletion:`, accounts);
+    // hide the UI
+    containerApp.style.opacity = 0; 
+  }
+  // clear close account fields
+  inputCloseUsername.value === inputClosePin.value === '';
 
+})
 
 
 
