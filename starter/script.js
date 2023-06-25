@@ -211,6 +211,17 @@ btnClose.addEventListener('click', function(e){
 
 })
 
+// Some method
+// INCLUDES - EQUALITY
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+console.log(movements.includes(-130)); // returns true. only checks for equality
+// SOME - CONDITION
+// some method checks for condition, eg deposits more than 5000
+const anyDeposits = movements.some(mov => mov > 5000); 
+console.log(anyDeposits);           
+
+
+
 
 
 
