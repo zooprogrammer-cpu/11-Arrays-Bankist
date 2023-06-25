@@ -229,10 +229,20 @@ btnLoan.addEventListener('click', function(e){
 
 });
 
+// Bank wants to calculate overall balance of all accounts
+// first use map method to return all movements into a new array that contains other arrays
+const overallBalance = accounts.map(acc => acc.movements)
+    .flat().reduce((acc, mov)=>{
+  return acc + mov; 
+}, 0);
+console.log(overallBalance);
 
-
-
-
+//flatMap combines flat and map into one method
+const flatMapBalance = accounts.flatMap(acc => acc.movements)
+    .reduce((acc, mov)=>{
+      return acc + mov; 
+    }, 0);
+console.log(flatMapBalance);
 
 
 
