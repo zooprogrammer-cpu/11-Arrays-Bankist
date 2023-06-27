@@ -229,21 +229,51 @@ btnLoan.addEventListener('click', function(e){
 
 });
 
-// Bank wants to calculate overall balance of all accounts
-// first use map method to return all movements into a new array that contains other arrays
-const overallBalance = accounts.map(acc => acc.movements)
-    .flat().reduce((acc, mov)=>{
-  return acc + mov; 
-}, 0);
-console.log(overallBalance);
+// Sorting - Mutates the original array
+// Strings
+const owners = ['Jonas', 'Zach', 'Adam', 'Martha'];
+console.log(owners.sort()); 
+console.log(owners);
+  // "Adam",
+  // "Jonas",
+  // "Martha",
+  // "Zach"
 
-//flatMap combines flat and map into one method
-const flatMapBalance = accounts.flatMap(acc => acc.movements)
-    .reduce((acc, mov)=>{
-      return acc + mov; 
-    }, 0);
-console.log(flatMapBalance);
+// Numbers
+// this does not work on numbers since sort method sorts based to strings
+// sort method converts everything to strings. so -, 1,2,3
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// console.log(movements.sort()); // prints [-130, -400, -650, 1300, 200, 3000, 450, 70]
 
+// return < 0, A is before B (keep order)
+// return > 0, B is before A (switch order)
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// Ascending
+// movements.sort((a,b)=>{
+//   if (a > b){
+//     return 1;
+//   } 
+//   if (b > a){
+//     return -1;   
+//   }
+// })
+// Above can be improved, if a is bigger than be, return a positive number
+movements.sort((a,b)=> a - b);
+console.log(movements);
+// [-650, -400, -130, 70, 200, 450, 1300, 3000]
+
+// Descending
+// movements.sort((a,b)=>{
+//   if (a > b){
+//     return -1;
+//   } 
+//   if (b > a){
+//     return 1;   
+//   }
+// })
+movements.sort((a,b) => b - a);
+console.log(movements);
+// [3000, 1300, 450, 200, 70, -130, -400, -650]
 
 
 
