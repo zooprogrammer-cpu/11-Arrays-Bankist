@@ -60,10 +60,13 @@ const inputTransferAmount = document.querySelector('.form__input--amount');
 const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
-
-const displayMovements = function (movements) {
+// Setting sort = false to sort the movements or not
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = ''; //Empty the containerMovemnts and the add new elements
-  movements.forEach(function (mov, i) {
+  // Use slice here to make a copy and then chain with sort instead of spread operator
+  const movs = sort ? movements.slice().sort((a,b) => a - b) : movements;
+  
+  movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     const html = `
@@ -228,52 +231,14 @@ btnLoan.addEventListener('click', function(e){
   inputLoanAmount.value = '';
 
 });
+// Event listener for sorting
+let sorted = false; //state variable for sort button 
+btnSort.addEventListener('click', function(e){
+  e.preventDefault(); 
+  displayMovements(currentAccount.movements, !sorted); // do the opposite of sorted
+  sorted = !sorted; 
+})
 
-// Sorting - Mutates the original array
-// Strings
-const owners = ['Jonas', 'Zach', 'Adam', 'Martha'];
-console.log(owners.sort()); 
-console.log(owners);
-  // "Adam",
-  // "Jonas",
-  // "Martha",
-  // "Zach"
-
-// Numbers
-// this does not work on numbers since sort method sorts based to strings
-// sort method converts everything to strings. so -, 1,2,3
-// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-// console.log(movements.sort()); // prints [-130, -400, -650, 1300, 200, 3000, 450, 70]
-
-// return < 0, A is before B (keep order)
-// return > 0, B is before A (switch order)
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-// Ascending
-// movements.sort((a,b)=>{
-//   if (a > b){
-//     return 1;
-//   } 
-//   if (b > a){
-//     return -1;   
-//   }
-// })
-// Above can be improved, if a is bigger than be, return a positive number
-movements.sort((a,b)=> a - b);
-console.log(movements);
-// [-650, -400, -130, 70, 200, 450, 1300, 3000]
-
-// Descending
-// movements.sort((a,b)=>{
-//   if (a > b){
-//     return -1;
-//   } 
-//   if (b > a){
-//     return 1;   
-//   }
-// })
-movements.sort((a,b) => b - a);
-console.log(movements);
-// [3000, 1300, 450, 200, 70, -130, -400, -650]
 
 
 
